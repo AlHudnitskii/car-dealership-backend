@@ -1,0 +1,34 @@
+venv/
+.env
+
+# ----------------------------------------------------------------------
+# 1. PYTHON / PIPENV
+# ----------------------------------------------------------------------
+# Виртуальное окружение Pipenv (venv)
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.$py.class
+
+*.log
+*.sqlite3
+db.sqlite3
+/media/
+/static_collected/
+
+pipenv.log
+
+.vscode/
+.vscode/*.local
+.env
+*.key
+*.pem
+
+*.DS_Store
+*.docker
+.docker/
+docker-compose.override.yml
+docker-compose.yaml.backup

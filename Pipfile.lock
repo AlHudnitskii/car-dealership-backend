@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a114b6f604dfcbe0c1f04a60d34b3184b881b94d2571c441739fc29084fc0bfd"
+            "sha256": "1a4fe09c21b4cffa692fefbc440cd0e6d2664fcb43177dfb59e1d2ad089fafaa"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -199,6 +199,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.9'",
             "version": "==1.21.11"
+        },
+        "gdal": {
+            "hashes": [
+                "sha256:c28cd5ffda3df98555e21083d922762b0a095d8f10292e2ec60ee0d55651d74a"
+            ],
+            "index": "pypi",
+            "markers": "python_full_version >= '3.8.0'",
+            "version": "==3.11.4"
         },
         "gunicorn": {
             "hashes": [
@@ -414,12 +422,12 @@
         },
         "redis": {
             "hashes": [
-                "sha256:b01bc7282b8444e28ec36b261df5375183bb47a07eb9c603f284e89cbc5ef010",
-                "sha256:f0544fa9604264e9464cdf4814e7d4830f74b165d52f2a330a760a88dd248b7f"
+                "sha256:4977af3c7d67f8f0eb8b6fec0dafc9605db9343142f634041fb0235f67c0588a",
+                "sha256:c949df947dca995dc68fdf5a7863950bf6df24f8d6022394585acc98e81624f1"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==6.4.0"
+            "version": "==7.0.1"
         },
         "six": {
             "hashes": [
@@ -557,12 +565,12 @@
         },
         "faker": {
             "hashes": [
-                "sha256:1508d2da94dfd1e0087b36f386126d84f8583b3de19ac18e392a2831a6676c57",
-                "sha256:22969803849ba0618be8eee2dd01d0d9e2cd3b75e6ff1a291fa9abcdb34da5e6"
+                "sha256:7505e59a7e02fa9010f06c3e1e92f8250d4cfbb30632296140c2d6dbef09b0fa",
+                "sha256:afe7ccc038da92f2fbae30d8e16d19d91e92e242f8401ce9caf44de892bab4c4"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==37.11.0"
+            "version": "==37.12.0"
         },
         "filelock": {
             "hashes": [

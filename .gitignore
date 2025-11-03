@@ -27,3 +27,4 @@ docker-compose.override.yml
 docker-compose.yaml.backup
 
 pipenv.log
+GDAL-3.7.3-cp310-cp310-win_amd64.whl

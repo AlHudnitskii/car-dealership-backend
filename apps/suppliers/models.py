@@ -1,6 +1,6 @@
 from django.db import models
-from vehicles.models import CarModel
 
+from apps.vehicles.models import CarModel
 from config.models import BaseModel
 
 
@@ -10,6 +10,8 @@ class Supplier(BaseModel):
     name = models.CharField(max_length=255, unique=True)
     year_founded = models.IntegerField()
     info = models.TextField(blank=True)
+
+    db_table = "suppliers"
 
     def __str__(self):
         return self.name
@@ -22,6 +24,8 @@ class SupplierCarOffer(BaseModel):
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock_count = models.PositiveIntegerField(default=0)
+
+    db_table = "supplier_car_offers"
 
     class Meta:
         unique_together = ("supplier", "car_model")
@@ -36,6 +40,8 @@ class SupplierAction(BaseModel):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2)
+
+    db_table = "supplier_actions"
 
     def __str__(self):
         return f"{self.supplier.name} - {self.name}"

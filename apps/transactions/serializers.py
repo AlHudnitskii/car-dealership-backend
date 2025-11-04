@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Offer
+from .models import Offer, Transaction
 
 
 class OfferCreateSerializer(serializers.ModelSerializer):
@@ -37,3 +37,27 @@ class OfferListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
         fields = ("id", "car_model", "max_price", "status", "dealership_match", "customer_email", "created_at")
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    """Serializer for viewing Transaction details."""
+
+    sender_representation = serializers.ReadOnlyField(source="sender.__str__")
+    recipient_representation = serializers.ReadOnlyField(source="recipient.__str__")
+    car_model_name = serializers.ReadOnlyField(source="car_model.__str__")
+
+    class Meta:
+        model = Transaction
+        fields = (
+            "id",
+            "transaction_type",
+            "amount",
+            "car_model",
+            "car_model_name",
+            "count",
+            "sender_representation",
+            "recipient_representation",
+            "created_at",
+            "updated_at",
+        )
+        read_only_fields = fields

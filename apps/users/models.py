@@ -18,6 +18,8 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    db_table = "users"
+
     def __str__(self):
         return self.email
 
@@ -29,6 +31,8 @@ class CustomerProfile(BaseModel):
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
 
     auto_generated_info = models.JSONField(default=dict, blank=True, null=True)
+
+    db_table = "customer_profiles"
 
     def __str__(self):
         return f"Profile of {self.user.email}"

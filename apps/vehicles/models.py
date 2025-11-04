@@ -12,6 +12,8 @@ class CarSpecification(BaseModel):
     transmission = models.CharField(max_length=50)
     body_type = models.CharField(max_length=50)
 
+    db_table = "car_specifications"
+
     def __str__(self):
         return f"{self.engine_type} / {self.power_hp}hp"
 
@@ -22,6 +24,8 @@ class CarModel(BaseModel):
     name = models.CharField(max_length=100)
     manufacturer = models.CharField(max_length=100)
     base_specs = models.ForeignKey(CarSpecification, on_delete=models.PROTECT, related_name="models")
+
+    db_table = "car_models"
 
     def __str__(self):
         return f"{self.manufacturer} {self.name}"

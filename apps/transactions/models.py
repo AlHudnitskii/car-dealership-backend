@@ -1,9 +1,9 @@
-from dealerships.models import Dealership
 from django.contrib.contenttypes.fields import ContentType, GenericForeignKey
 from django.db import models
-from users.models import CustomerProfile
-from vehicles.models import CarModel
 
+from apps.dealerships.models import Dealership
+from apps.users.models import CustomerProfile
+from apps.vehicles.models import CarModel
 from config.models import BaseModel
 
 
@@ -22,6 +22,8 @@ class Offer(BaseModel):
     max_price = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="PENDING")
     dealership_match = models.ForeignKey(Dealership, on_delete=models.SET_NULL, null=True, blank=True)
+
+    db_table = "offers"
 
     def __str__(self):
         return f"Offer {self.id} by {self.customer.user.email} - Status: {self.status}"
@@ -49,6 +51,8 @@ class Transaction(BaseModel):
     )
     recipient_object_id = models.PositiveIntegerField()
     recipient = GenericForeignKey("recipient_content_type", "recipient_object_id")
+
+    db_table = "transactions"
 
     def __str__(self):
         return f"{self.transaction_type} {self.id} - {self.amount} USD"

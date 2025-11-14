@@ -26,3 +26,4 @@ repos:
         args:
           - "--max-line-length=120"
           - "--ignore=E203,W503,**F401,F841**"
+          - "--exclude=migrations,__pycache__,.git,venv,.venv"

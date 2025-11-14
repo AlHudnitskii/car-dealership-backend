@@ -37,7 +37,7 @@ class SupplierStatsSerializer(serializers.Serializer):
     supplier_name = serializers.CharField()
     total_sales = serializers.IntegerField()
     total_revenue = serializers.DecimalField(max_digits=12, decimal_places=2)
-    ctive_offers = serializers.IntegerField()
+    active_offers = serializers.IntegerField()
     total_stock = serializers.IntegerField()
     partner_dealerships = serializers.IntegerField()
     active_promotions = serializers.IntegerField()

@@ -1,4 +1,3 @@
-# Virtual environments
 venv/
 .venv/
 __pycache__/
@@ -13,14 +12,18 @@ db.sqlite3
 /media/
 /static_collected/
 
-.env
+.env.prod
 *.key
 
 .vscode/
 .vscode/*.local
+.idea/
+.idea/*workspace.xml
 
 *.DS_Store
 *.pcm
+*/migrations/
+
 
 .docker/
 docker-compose.override.yml
@@ -30,6 +33,3 @@ pipenv.log
 GDAL-3.7.3-cp310-cp310-win_amd64.whl
 
 .pytest_cache/
-conftest.py
-
-README.md

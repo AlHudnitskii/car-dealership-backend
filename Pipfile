@@ -19,6 +19,8 @@ django-filter = "*"
 django-allauth = "*"
 django-redis = "*"
 gunicorn = "*"
+pytest-xdict = "*"
+
 
 [dev-packages]
 pytest = "*"

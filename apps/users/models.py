@@ -3,6 +3,8 @@ from django.db import models
 
 from config.models import BaseModel
 
+from .managers import UserManager
+
 
 class User(AbstractUser):
     """Custom User Profile with addiction roles"""
@@ -14,6 +16,8 @@ class User(AbstractUser):
     is_dealership_admin = models.BooleanField(default=False)
     is_supplier_admin = models.BooleanField(default=False)
     email_confirmed = models.BooleanField(default=False, verbose_name="Email confirmed")
+
+    objects = UserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

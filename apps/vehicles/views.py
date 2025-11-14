@@ -18,9 +18,9 @@ class CarSpecificationViewSet(viewsets.ModelViewSet):
 
     serializer_class = CarSpecificationSerializer
     queryset = CarSpecification.objects.all()
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ["engine_type", "transmission", "body_type"]
-    search_fields = ["engine_type", "color", "body_type"]
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filterset_fields = ("engine_type", "transmission", "body_type")
+    search_fields = ("engine_type", "color", "body_type")
 
     def get_permissions(self):
         if self.action in ["list", "retrieve"]:
@@ -45,10 +45,10 @@ class CarModelViewSet(viewsets.ModelViewSet):
     """
 
     queryset = CarModel.objects.all().select_related("base_specs")
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["manufacturer", "is_active", "base_specs__engine_type"]
-    search_fields = ["name", "manufacturer"]
-    ordering_fields = ["manufacturer", "name", "base_specs__power_hp"]
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_fields = ("manufacturer", "is_active", "base_specs__engine_type")
+    search_fields = ("name", "manufacturer")
+    ordering_fields = ("manufacturer", "name", "base_specs__power_hp")
 
     def get_serializer_class(self):
         if self.action == "retrieve":

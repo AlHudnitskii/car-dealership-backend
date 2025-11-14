@@ -21,10 +21,10 @@ from .serializers import (
 class DealershipViewSet(viewsets.ModelViewSet):
     """API for managing Dealerships. Full access for Admins, restricted for others."""
 
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["country", "city"]
-    search_fields = ["name", "address", "city"]
-    ordering_fields = ["name", "balance", "created_at"]
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_fields = ("country", "city")
+    search_fields = ("name", "address", "city")
+    ordering_fields = ("name", "balance", "created_at")
 
     def get_queryset(self):
         user = self.request.user
@@ -61,9 +61,9 @@ class DealershipCarInventoryViewSet(viewsets.ModelViewSet):
     """API for managing car stock in dealerships. Access restricted to Staff/Dealership Admins."""
 
     serializer_class = DealershipCarInventorySerializer
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ["dealership", "car_model"]
-    ordering_fields = ["count", "purchase_price_avg"]
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_fields = ("dealership", "car_model")
+    ordering_fields = ("count", "purchase_price_avg")
 
     def get_queryset(self):
         user = self.request.user
@@ -93,9 +93,9 @@ class DealershipPreferredSupplierViewSet(viewsets.ReadOnlyModelViewSet):
     """API for viewing preferred suppliers. Only read-only, management handled by Celery/Admins."""
 
     serializer_class = DealershipPreferredSupplierSerializer
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ["dealership", "car_model", "supplier"]
-    ordering_fields = ["best_price", "last_checked"]
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_fields = ("dealership", "car_model", "supplier")
+    ordering_fields = ("best_price", "last_checked")
 
     def get_queryset(self):
         user = self.request.user
@@ -122,10 +122,10 @@ class DealershipActionViewSet(viewsets.ModelViewSet):
     """API for managing dealership promotions/actions. Access restricted to Staff/Dealership Admins."""
 
     serializer_class = DealershipActionSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["dealership", "start_date", "end_date"]
-    search_fields = ["name", "description"]
-    ordering_fields = ["start_date", "discount_percentage"]
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_fields = ("dealership", "start_date", "end_date")
+    search_fields = ("name", "description")
+    ordering_fields = ("start_date", "discount_percentage")
 
     def get_queryset(self):
         user = self.request.user

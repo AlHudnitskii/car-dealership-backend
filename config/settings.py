@@ -1,4 +1,5 @@
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -6,6 +7,8 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+sys.path.insert(0, str(BASE_DIR / "apps"))
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key-for-dev-fallback")
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
@@ -172,8 +175,8 @@ EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.conso
 EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
 EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
 EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "cardealershipbackend11@gmail.com")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "cardealershipbackend11cardealershipbackend11")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@cardealership.com")
 
 LANGUAGE_CODE = "en-us"

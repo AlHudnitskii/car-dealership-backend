@@ -46,9 +46,9 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
 
     serializer_class = TransactionSerializer
 
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ["transaction_type", "car_model"]
-    ordering_fields = ["amount", "created_at"]
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_fields = ("transaction_type", "car_model")
+    ordering_fields = ("amount", "created_at")
 
     def get_queryset(self):
         user = self.request.user

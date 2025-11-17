@@ -18,10 +18,10 @@ class SupplierViewSet(viewsets.ModelViewSet):
 
     serializer_class = SupplierSerializer
     queryset = Supplier.objects.all().prefetch_related("car_offers")
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["year_founded", "is_active"]
-    search_fields = ["name", "info"]
-    ordering_fields = ["name", "year_founded", "created_at"]
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_fields = ("year_founded", "is_active")
+    search_fields = ("name", "info")
+    ordering_fields = ("name", "year_founded", "created_at")
 
     def get_permissions(self):
         if self.action in ["create", "update", "partial_update", "destroy"]:
@@ -42,9 +42,9 @@ class SupplierViewSet(viewsets.ModelViewSet):
 class SupplierCarOfferViewSet(viewsets.ModelViewSet):
     """API for managing car offers from suppliers. Full access for Admins/Supplier Admins, read-only for others."""
 
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ["supplier", "car_model", "price", "is_active"]
-    ordering_fields = ["price", "stock_count", "updated_at"]
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_fields = ("supplier", "car_model", "price", "is_active")
+    ordering_fields = ("price", "stock_count", "updated_at")
 
     def get_queryset(self):
         queryset = SupplierCarOffer.objects.filter(is_active=True).select_related("supplier", "car_model")
@@ -79,10 +79,10 @@ class SupplierActionViewSet(viewsets.ModelViewSet):
     """API for managing supplier promotions/actions. Full access for Admins/Supplier Admins, read-only for others."""
 
     serializer_class = SupplierActionSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["supplier", "start_date", "end_date", "is_active"]
-    search_fields = ["name", "description"]
-    ordering_fields = ["start_date", "discount_percentage"]
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_fields = ("supplier", "start_date", "end_date", "is_active")
+    search_fields = ("name", "description")
+    ordering_fields = ("start_date", "discount_percentage")
 
     def get_queryset(self):
         queryset = SupplierAction.objects.filter(is_active=True)

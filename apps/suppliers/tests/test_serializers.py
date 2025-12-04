@@ -1,9 +1,5 @@
 import unittest
-from datetime import datetime, timezone
 from decimal import Decimal
-from unittest.mock import MagicMock
-
-from rest_framework import serializers
 
 from apps.suppliers.serializers import (
     SupplierActionSerializer,
@@ -12,77 +8,7 @@ from apps.suppliers.serializers import (
     SupplierSerializer,
 )
 
-
-class MockSupplier:
-    def __init__(self, id=1, name="Acme Motors", year_founded=2000, is_active=True):
-        self.id = id
-        self.name = name
-        self.year_founded = year_founded
-        self.info = "Global auto parts supplier."
-        self.is_active = is_active
-        self.created_at = datetime.now(timezone.utc)
-        self.car_offers = MagicMock()
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return self.name
-
-
-class MockCarModel:
-    def __init__(self, id=5, name="Mustang"):
-        self.id = id
-        self.name = name
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"Ford - {self.name}"
-
-
-class MockSupplierCarOffer:
-    def __init__(self, id=10, supplier=None, car_model=None, price=Decimal("1500.00"), stock_count=5, is_active=True):
-        self.id = id
-        self.supplier = supplier if supplier is not None else MockSupplier()
-        self.car_model = car_model if car_model is not None else MockCarModel()
-        self.price = price
-        self.stock_count = stock_count
-        self.is_active = is_active
-
-    @property
-    def pk(self):
-        return self.id
-
-
-class MockSupplierAction:
-    def __init__(self, id=20, supplier=None, name="Summer Sale", discount_percentage=Decimal("10.00"), is_active=True):
-        self.id = id
-        self.supplier = supplier if supplier is not None else MockSupplier()
-        self.name = name
-        self.description = "10% off selected parts."
-        self.start_date = datetime.now(timezone.utc)
-        self.end_date = datetime.now(timezone.utc)
-        self.discount_percentage = discount_percentage
-        self.is_active = is_active
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"{self.supplier.name} - {self.name}"
-
-
-class MockRelatedField(serializers.Field):
-    def to_internal_value(self, data):
-        return data
-
-    def to_representation(self, value):
-        return value.pk if hasattr(value, "pk") else value
+from ....mocks import MockCarModel, MockRelatedField, MockSupplier, MockSupplierAction, MockSupplierCarOffer
 
 
 class SupplierSerializerTest(unittest.TestCase):

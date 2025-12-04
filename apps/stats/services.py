@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Count, DecimalField, Q, Sum
 from django.db.models.functions import Coalesce
@@ -10,6 +11,15 @@ from apps.users.models import CustomerProfile
 DEALERSHIP_CT = None
 CUSTOMER_CT = None
 SUPPLIER_CT = None
+
+
+def get_dealership_ct():
+    global DEALERSHIP_CT
+    if DEALERSHIP_CT is None:
+        from apps.dealerships.models import Dealership
+
+        DEALERSHIP_CT = ContentType.objects.get_for_model(Dealership)
+    return DEALERSHIP_CT
 
 
 class DealershipStatsService:

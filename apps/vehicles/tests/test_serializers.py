@@ -1,52 +1,11 @@
 import unittest
-from datetime import datetime, timezone
 
+from ....mocks import MockCarModel, MockCarSpecification
 from ..serializers import (
     CarModelDetailSerializer,
     CarModelListCreateSerializer,
     CarSpecificationSerializer,
 )
-
-
-class MockCarSpecification:
-    def __init__(
-        self,
-        id=1,
-        engine_type="Electric",
-        power_hp=200,
-        color="Red",
-        transmission="Auto",
-        body_type="Sedan",
-        is_active=True,
-    ):
-        self.id = id
-        self.engine_type = engine_type
-        self.power_hp = power_hp
-        self.color = color
-        self.transmission = transmission
-        self.body_type = body_type
-        self.is_active = is_active
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"{self.engine_type} / {self.power_hp}hp"
-
-
-class MockCarModel:
-    def __init__(self, id=10, name="Model 3", manufacturer="Tesla", base_specs=None, is_active=True):
-        self.id = id
-        self.name = name
-        self.manufacturer = manufacturer
-        self.base_specs = base_specs if base_specs is not None else MockCarSpecification()
-        self.is_active = is_active
-        self.created_at = datetime.now(timezone.utc)
-        self.updated_at = datetime.now(timezone.utc)
-
-    def __str__(self):
-        return f"{self.manufacturer} {self.name}"
 
 
 class CarSpecificationSerializerTest(unittest.TestCase):

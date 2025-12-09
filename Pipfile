@@ -11,6 +11,7 @@ django-countries = "*"
 djangorestframework-simplejwt = "*"
 drf-yasg = "*"
 django-celery-beat = "*"
+flower = "*"
 django-celery-results = "*"
 celery = "*"
 redis = "*"
@@ -19,8 +20,7 @@ django-filter = "*"
 django-allauth = "*"
 django-redis = "*"
 gunicorn = "*"
-pytest-xdict = "*"
-
+django-cors-headers = "*"
 
 [dev-packages]
 pytest = "*"

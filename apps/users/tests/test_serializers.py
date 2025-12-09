@@ -1,5 +1,4 @@
 import unittest
-from datetime import datetime, timezone
 
 from apps.users.serializers import (
     CustomerProfileSerializer,
@@ -7,61 +6,7 @@ from apps.users.serializers import (
     UserSerializer,
 )
 
-
-class MockUser:
-    def __init__(
-        self,
-        id=1,
-        email="test@example.com",
-        username="tester",
-        first_name="Test",
-        last_name="User",
-        is_active=True,
-        is_superuser=False,
-        is_staff=False,
-        is_customer=True,
-        is_dealership_admin=False,
-        is_supplier_admin=False,
-        email_confirmed=False,
-    ):
-        self.id = id
-        self.email = email
-        self.username = username
-        self.first_name = first_name
-        self.last_name = last_name
-        self.is_active = is_active
-        self.is_superuser = is_superuser
-        self.is_staff = is_staff
-        self.is_customer = is_customer
-        self.is_dealership_admin = is_dealership_admin
-        self.is_supplier_admin = is_supplier_admin
-        self.email_confirmed = email_confirmed
-        self.date_joined = datetime.now(timezone.utc)
-        self.password = "hashed_password"
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return self.email
-
-
-class MockCustomerProfile:
-    def __init__(self, id=10, user=None, balance="100.50", auto_generated_info=None):
-        self.id = id
-        self.user = user if user is not None else MockUser()
-        self.balance = balance
-        self.auto_generated_info = auto_generated_info if auto_generated_info is not None else {"last_login": "today"}
-        self.created_at = datetime.now(timezone.utc)
-        self.updated_at = datetime.now(timezone.utc)
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"Profile of {self.user.email}"
+from ....mocks import MockCustomerProfile, MockUser
 
 
 class UserSerializerTest(unittest.TestCase):

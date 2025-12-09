@@ -1,9 +1,6 @@
 import unittest
-from datetime import datetime, timezone
 from decimal import Decimal
 from unittest.mock import MagicMock, patch
-
-from rest_framework import serializers
 
 from apps.transactions.serializers import (
     OfferCreateSerializer,
@@ -11,121 +8,15 @@ from apps.transactions.serializers import (
     TransactionSerializer,
 )
 
-
-class MockCarModel:
-    def __init__(self, id=5, name="Mustang"):
-        self.id = id
-        self.name = name
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"CarModel: {self.name}"
-
-
-class MockUser:
-    def __init__(self, id=1, email="user@example.com", is_customer=True, is_staff=False, is_superuser=False):
-        self.id = id
-        self.email = email
-        self.is_customer = is_customer
-        self.is_staff = is_staff
-        self.is_superuser = is_superuser
-        self.customer_profile = MockCustomerProfile(user=self)
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return self.email
-
-
-class MockCustomerProfile:
-    def __init__(self, user=None, balance=Decimal("1000.00")):
-        self.id = 10
-        self.user = user if user is not None else MockUser()
-        self.balance = balance
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"Customer Profile ID: {self.id}"
-
-
-class MockDealership:
-    def __init__(self):
-        self.id = 50
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"Dealership ID: {self.id}"
-
-
-class MockOffer:
-    def __init__(
-        self,
-        id=100,
-        car_model=None,
-        max_price=Decimal("500.00"),
-        status="PENDING",
-        dealership_match=None,
-        customer=None,
-    ):
-        self.id = id
-        self.car_model = car_model if car_model is not None else MockCarModel()
-        self.max_price = max_price
-        self.status = status
-        self.dealership_match = dealership_match if dealership_match is not None else MockDealership()
-        self.customer = customer if customer is not None else MockCustomerProfile()
-        self.created_at = datetime.now(timezone.utc)
-
-    @property
-    def pk(self):
-        return self.id
-
-
-class MockTransaction:
-    def __init__(
-        self,
-        id=200,
-        transaction_type="SALE",
-        amount=Decimal("25000.00"),
-        car_model=None,
-        count=1,
-        sender=None,
-        recipient=None,
-    ):
-        self.id = id
-        self.transaction_type = transaction_type
-        self.amount = amount
-        self.car_model = car_model if car_model is not None else MockCarModel()
-        self.count = count
-        self.sender = sender if sender is not None else MockCustomerProfile()
-        self.recipient = recipient if recipient is not None else MockDealership()
-        self.created_at = datetime.now(timezone.utc)
-        self.updated_at = datetime.now(timezone.utc)
-
-    @property
-    def pk(self):
-        return self.id
-
-    def __str__(self):
-        return f"{self.transaction_type} {self.id} - {self.amount} USD"
-
-
-class MockRelatedField(serializers.Field):
-    def to_internal_value(self, data):
-        return data
-
-    def to_representation(self, value):
-        return value.pk if hasattr(value, "pk") else value
+from ....mocks import (
+    MockCarModel,
+    MockCustomerProfile,
+    MockDealership,
+    MockOffer,
+    MockRelatedField,
+    MockTransaction,
+    MockUser,
+)
 
 
 class OfferCreateSerializerTest(unittest.TestCase):

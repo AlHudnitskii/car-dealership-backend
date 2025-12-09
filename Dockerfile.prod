@@ -12,10 +12,9 @@ WORKDIR /usr/src/app
 
 COPY Pipfile Pipfile.lock ./
 RUN pip install --no-cache-dir pipenv && \
-    pipenv install --system --deploy --ignore-pipfile
+    pipenv install --system --ignore-pipfile
 
-
-FROM python:3.11-slim
+FROM python:3.11-slim as base
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -26,7 +25,6 @@ RUN apt-get update && \
 
 RUN groupadd -r django_group && \
     useradd -r -g django_group -s /bin/false django_user
-
 
 WORKDIR /usr/src/app
 
@@ -42,6 +40,9 @@ RUN mkdir -p /usr/src/app/staticfiles /usr/src/app/media && \
     chown -R django_user:django_group /usr/src/app
 
 USER django_user
+
+FROM base as django
+
 RUN python manage.py collectstatic --noinput || true
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
@@ -50,3 +51,17 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
 EXPOSE 8000
 
 CMD ["gunicorn", "config.wsgi:application", "-c", "gunicorn.conf.py"]
+
+FROM base as celery_worker
+
+CMD ["celery", "-A", "config", "worker", "-l", "info"]
+
+FROM base as celery_beat
+
+CMD ["celery", "-A", "config", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"]
+
+FROM base as flower
+
+EXPOSE 5555
+
+CMD ["celery", "-A", "config", "flower", "--port=5555"]
